@@ -26,5 +26,5 @@ public class FileController : ControllerBase
     }
 
     [HttpPost("upload")]
-    public async Task<IActionResult> UploadFile([FromBody] IFormFile file, [FromHeader] bool ignoreInapropriate) => Ok(await _fileRepository.UploadFile(file, ignoreInapropriate));
+    public async Task<IActionResult> UploadFile([FromForm] IFormFile file, [FromHeader] bool ignoreInapropriate) => Ok(await _fileRepository.UploadFile(file, ignoreInapropriate));
 }
