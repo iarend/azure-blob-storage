@@ -3,6 +3,20 @@ using AzureBlobApiTest.Repository.File;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "Front-End",
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                          .AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .WithMethods("GET", "POST", "PUT", "DELETE");
+                      });
+});
+
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
