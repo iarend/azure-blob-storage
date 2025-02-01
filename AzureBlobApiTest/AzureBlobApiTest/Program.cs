@@ -3,10 +3,11 @@ using AzureBlobApiTest.Repository.File;
 
 var builder = WebApplication.CreateBuilder(args);
 
+const string _myCors = "Front-End";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "Front-End",
+    options.AddPolicy(name: _myCors,
                       policy =>
                       {
                           policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
@@ -36,6 +37,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseCors(_myCors);
 
 app.UseAuthorization();
 
