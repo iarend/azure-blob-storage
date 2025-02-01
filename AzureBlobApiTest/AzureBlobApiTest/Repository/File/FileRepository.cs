@@ -61,9 +61,9 @@ public class FileRepository : IFileRepository
     }
 
     private async Task IsSafeFile(IFormFile file, bool ignoreInapropriate)
-    {
+    {   
         // 1. Verificar tipo de arquivo
-        var allowedExtensions = new[] { ".jpg", ".png", ".pdf" };
+        var allowedExtensions = new[] { ".jpg", ".png", ".pdf", ".txt" };
         var extension = Path.GetExtension(file.FileName).ToLower();
         if (!allowedExtensions.Contains(extension))
         {
@@ -72,7 +72,7 @@ public class FileRepository : IFileRepository
 
         // 2. Verificar tipo MIME
         var mimeType = file.ContentType;
-        if (!mimeType.StartsWith("image/") && mimeType != "application/pdf")
+        if (!mimeType.StartsWith("image/") && mimeType != "application/pdf" && !mimeType.StartsWith("text/"))
         {
             throw new Exception("O tipo do arquivo informado não é permitido.");
         }
